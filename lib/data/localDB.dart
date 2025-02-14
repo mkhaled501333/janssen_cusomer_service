@@ -18,8 +18,8 @@ class HiveDB extends ServerDB {
 
   addtogovernomates(governomate gover) {
     // print(value);
-    Hive.box<governomate>("governomates").put(gover.id, gover);
-    Hive.box<governomate>("pendinggovernomates").put(gover.id, gover);
+    Hive.box<governomate>("governomates").put(gover.id.toString(), gover);
+    Hive.box<governomate>("pendinggovernomates").put(gover.id.toString(), gover);
      Refresh_UI();
   }
 
@@ -27,9 +27,11 @@ class HiveDB extends ServerDB {
     int i = 0;
     Hive.box<governomate>("governomates").clear();
     for (var element in g.entries) {
-      i++;
+      i++;print(i);
        Hive.box<governomate>("governomates")
-        .put(i, governomate(id: i, governo: element.key, cityies: element.value));
+        .put(i.toString(), governomate(id: i, governo: element.key, cityies: element.value));
+       Hive.box<governomate>("pendinggovernomates")
+        .put(i.toString(), governomate(id: i, governo: element.key, cityies: element.value));
     }
   
   }

@@ -846,7 +846,9 @@ class MantainceRequestInfo extends StatelessWidget {
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                SearchWithSugestions(
+                                SearchWithSugestions(onselected: (p0) {
+                                  
+                                },
                                   labal: 'العلامة التجاريه',
                                   listOfsugestions: context.read<HiveDB>().prodcuts.values.map((convert) => convert.companyName).toList(),
                                   TEC_forgovernmoate: con.TED_productType,
@@ -856,7 +858,9 @@ class MantainceRequestInfo extends StatelessWidget {
                                   },
                                 ),
                                 const Gap(5),
-                                SearchWithSugestions(
+                                SearchWithSugestions(onselected: (p0) {
+                                  
+                                },
                                   labal: 'اسم المنتج',
                                   listOfsugestions:
                                       context.read<HiveDB>().prodcuts.values.where((test) => test.companyName == con.TED_productType.text).expand((e) => e.prodcuts).toList(),
@@ -942,7 +946,9 @@ class MantainceRequestInfo extends StatelessWidget {
                                     width: 200,
                                     controller: con.TED_purcheDate),
                                 const Gap(5),
-                                SearchWithSugestions(
+                                SearchWithSugestions(onselected: (p0) {
+                                  
+                                },
                                     listOfsugestions: context.read<HiveDB>().reqreasons.values.map((toElement) => toElement.Reqreason).toList(),
                                     onSubmitted: (v) {
                                       FocusScope.of(context).nextFocus();
@@ -1005,7 +1011,9 @@ class MantainceRequestInfo extends StatelessWidget {
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              SearchWithSugestions(
+                              SearchWithSugestions(onselected: (p0) {
+                                
+                              },
                                 labal: 'العلامة التجاريه',
                                 listOfsugestions: context.read<HiveDB>().prodcuts.values.map((convert) => convert.companyName).toList(),
                                 TEC_forgovernmoate: con.TED_productType,
@@ -1015,7 +1023,9 @@ class MantainceRequestInfo extends StatelessWidget {
                                 },
                               ),
                               const Gap(5),
-                              SearchWithSugestions(
+                              SearchWithSugestions(onselected: (p0) {
+                                
+                              },
                                 labal: 'اسم المنتج',
                                 listOfsugestions:
                                     context.read<HiveDB>().prodcuts.values.where((test) => test.companyName == con.TED_productType.text).expand((e) => e.prodcuts).toList(),

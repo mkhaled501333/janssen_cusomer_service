@@ -2,9 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hive/hive.dart';
-import 'package:janssen_cusomer_service/Ui/screens/rightCard/rightCard.dart';
-import 'package:janssen_cusomer_service/Ui/users/usersManagementView.dart';
 import 'package:janssen_cusomer_service/app/actions.dart';
 import 'package:janssen_cusomer_service/data/localDB.dart';
 import 'package:janssen_cusomer_service/models/governomates.dart';
@@ -185,47 +182,47 @@ class Governomates extends StatelessWidget {
                                   ))
                               .toList(),
                         ),
-                        // Row(
-                        //   crossAxisAlignment: CrossAxisAlignment.end,
-                        //   mainAxisAlignment: MainAxisAlignment.end,
-                        //   children: [
-                        //     IconButton(
-                        //       icon: const Icon(Icons.add),
-                        //       onPressed: () {
-                        //         TextEditingController t = TextEditingController();
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.add),
+                              onPressed: () {
+                                TextEditingController t = TextEditingController();
 
-                        //         showDialog(
-                        //             context: context,
-                        //             builder: (c) => AlertDialog(
-                        //                   title: const Text('اضافة منتج'),
-                        //                   content: SizedBox(
-                        //                     width: 100,
-                        //                     height: 170,
-                        //                     child: Column(
-                        //                       children: [
-                        //                         TextField(
-                        //                           controller: t,
-                        //                         ),
-                        //                         Row(
-                        //                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        //                           children: [
-                        //                             ElevatedButton(
-                        //                                 onPressed: () {
-                        //                                   e.prodcuts.add(t.text);
-                        //                                   myType.addProdcuts(e);
-                        //                                   Navigator.pop(context);
-                        //                                 },
-                        //                                 child: const Text("تم")),
-                        //                           ],
-                        //                         )
-                        //                       ],
-                        //                     ),
-                        //                   ),
-                        //                 ));
-                        //       },
-                        //     ),
-                        //   ],
-                        // )
+                                showDialog(
+                                    context: context,
+                                    builder: (c) => AlertDialog(
+                                          title: const Text('اضافة مدينه'),
+                                          content: SizedBox(
+                                            width: 100,
+                                            height: 170,
+                                            child: Column(
+                                              children: [
+                                                TextField(
+                                                  controller: t,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                  children: [
+                                                    ElevatedButton(
+                                                        onPressed: () {
+                                                          gov.cityies.add(t.text);
+                                                          myType.addtogovernomates(gov);
+                                                          Navigator.pop(context);
+                                                        },
+                                                        child: const Text("تم")),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ));
+                              },
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   )),

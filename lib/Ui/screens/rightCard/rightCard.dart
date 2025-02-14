@@ -387,6 +387,67 @@ Row buttoms(BuildContext context, TEDcontrollers con) {
     ],
   );
 }
+   TextEditingController v1=TextEditingController();
+   TextEditingController v2=TextEditingController();
+class MyWidget extends StatelessWidget {
+   MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+                SearchWithSugestions(
+                                            validator: (p0) {
+                                              if (g.keys
+                                                  .where(
+                                                    (element) => element == p0,
+                                                  )
+                                                  .isEmpty) {
+                                                return 'اختر من المحافظات الموجوده';
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                            autofocus: false,
+                                            labal: 'المحافظه',
+                                            listOfsugestions:
+                                                g.keys.toSet().toList(),
+                                            TEC_forgovernmoate:
+                                                v1,
+                                            onSubmitted: (v) {
+                                              FocusScope.of(context)
+                                                  .nextFocus();
+                                            },
+                                          ),
+                                          const Gap(11),
+                                          SearchWithSugestions(
+                                          validator: (p1) {
+            
+            if ( g[v2.text]==null) {
+              return 'اختر من المدن الموجوده';
+            } else {
+              if ( g[v2.text]!.where((element) => element==p1,).isEmpty) {
+                  return 'اختر من المدن الموجوده';
+              } else {
+                  return null;
+              }
+            
+            }
+          },
+                                            autofocus: false,
+                                            labal: 'المنظقه',
+                                            listOfsugestions:
+                                                g[v1.text] ??
+                                                    [],
+                                            TEC_forgovernmoate: v2,
+                                            onSubmitted: (v) {
+                                              FocusScope.of(context)
+                                                  .nextFocus();
+                                            },
+                                          ),
+    ],);
+  }
+}
+
 
 addNedwTicketDialog(BuildContext c) {
   TEDcontrollers con = TEDcontrollers();
@@ -412,7 +473,7 @@ addNedwTicketDialog(BuildContext c) {
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      children: [
+                      children: [MyWidget(),
                         const Gap(5),
                         Column(
                           children: [
@@ -659,6 +720,86 @@ class SearchWithSugestions extends StatelessWidget {
     );
   }
 }
+class SearchWithSugestions3 extends StatelessWidget {
+  SearchWithSugestions3({
+    super.key,
+    required this.listOfsugestions,
+    required this.labal,
+    required this.TEC_forgovernmoate,
+    this.onSubmitted,
+    this.validator,
+    required this.onselected,
+    this.autofocus = true,
+  });
+  SuggestionsBoxController suggestionBoxController = SuggestionsBoxController();
+  final List<String> listOfsugestions;
+
+  static List<String> getSuggestions(String query, List<String> governomets) {
+    List<String> matches = <String>[];
+    matches.addAll(governomets);
+
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+
+  bool autofocus;
+  String? Function(String?)? validator;
+  final TextEditingController TEC_forgovernmoate;
+  final Function(String)? onSubmitted;
+  final void Function(String) onselected;
+// ignore: unused_field
+  String? _selectedFruit;
+  final String labal;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        suggestionBoxController.close();
+      },
+      child: SizedBox(
+        width: 200,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            DropDownSearchFormField(
+              textFieldConfiguration: TextFieldConfiguration(
+                autofocus: autofocus,
+                style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.w500),
+                onSubmitted: onSubmitted,
+                decoration: InputDecoration(
+                    filled: true,
+                    fillColor: const Color.fromARGB(31, 184, 161, 161),
+                    labelText: labal,
+                    labelStyle: const TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                    border: const OutlineInputBorder()),
+                controller: TEC_forgovernmoate,
+              ),
+              suggestionsCallback: (pattern) {
+                return getSuggestions(pattern, listOfsugestions);
+              },
+              itemBuilder: (context, String suggestion) {
+                return ListTile(
+                  title: Text(suggestion),
+                );
+              },
+              itemSeparatorBuilder: (context, index) {
+                return const Divider();
+              },
+              transitionBuilder: (context, suggestionsBox, controller) {
+                return suggestionsBox;
+              },
+              onSuggestionSelected:onselected,
+              suggestionsBoxController: suggestionBoxController,
+              validator: validator,
+              onSaved: (value) => _selectedFruit = value,
+              displayAllSuggestionWhenTap: true,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class SearchWithSugestions2 extends StatelessWidget {
   SearchWithSugestions2({
@@ -739,7 +880,7 @@ class SearchWithSugestions2 extends StatelessWidget {
 
  Map<String,List<String>> g={} ;
  
-  Map<String,List<String>> ggg=
+  Map<String,List<String>> g33=
  {
 'اسوان':[ ' نصر النوبة',
  ' كوم أمبو',

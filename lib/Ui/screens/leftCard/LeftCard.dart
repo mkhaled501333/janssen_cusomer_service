@@ -4,14 +4,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:janssen_cusomer_service/Ui/screens/leftCard/calls.dart';
-
 import 'package:janssen_cusomer_service/Ui/screens/leftCard/customerInfo.dart';
 import 'package:janssen_cusomer_service/Ui/screens/leftCard/mantaniceReq.dart';
 import 'package:janssen_cusomer_service/Ui/screens/leftCard/printingAndeditnotes.dart';
 import 'package:janssen_cusomer_service/Ui/screens/leftCard/tecktInfo.dart';
-
 import 'package:provider/provider.dart';
-
 import 'package:janssen_cusomer_service/Ui/base.dart';
 import 'package:janssen_cusomer_service/data/localDB.dart';
 
@@ -34,6 +31,7 @@ class LeftCard extends StatelessWidget {
                 : SingleChildScrollView(
                     child: Column(
                       children: [
+                 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [

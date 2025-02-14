@@ -14,7 +14,8 @@ import 'package:janssen_cusomer_service/models/ticket.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 bool done = false;
-// String ip = '192.168.1.31';
+// String ip = '192.168.1.16';
+// String ip = '192.168.1.77';
 String ip = '10.171.253.202';
 
 class ServerDB extends ChangeNotifier {
@@ -22,7 +23,7 @@ class ServerDB extends ChangeNotifier {
   late WebSocketChannel prodcutchannel;
   late WebSocketChannel calltypechannel;
   late WebSocketChannel reqreasonchannel;
-  late WebSocketChannel governomantes;
+  late WebSocketChannel governomanteschannel;
 
   CustomerModel? shosenCustomer;
   TicketModel? chosenTicket;
@@ -123,15 +124,15 @@ class ServerDB extends ChangeNotifier {
           }
         });
         Uri f = Uri.http('$ip:8080', '/governomates');
-        //sen pendingreqreason
-        // for (var element in Hive.box<governomate>("pendinggovernomates").values) {
-        //   await http.put(f, body: element.toJson()).then((e) {
-        //     if (e.statusCode == 200) {
-        //       Hive.box<governomate>("pendinggovernomates")
-        //           .delete(element.id.toString());
-        //     }
-        //   });
-        // }
+        // sen pendingreqreason
+        for (var element in Hive.box<governomate>("pendinggovernomates").values) {
+          await http.put(f, body: element.toJson()).then((e) {
+            if (e.statusCode == 200) {print('1111111111111111111111111111');
+              Hive.box<governomate>("pendinggovernomates")
+                  .delete(element.id.toString());
+            }
+          });
+        }
         // recevie updates
         Hive.box<governomate>("governomates").clear();
         await http.get(f,).then((onValue) {
@@ -164,7 +165,7 @@ class ServerDB extends ChangeNotifier {
     calltypechannel = WebSocketChannel.connect(b);
     prodcutchannel = WebSocketChannel.connect(c);
     reqreasonchannel = WebSocketChannel.connect(d);
-    governomantes = WebSocketChannel.connect(f);
+    governomanteschannel = WebSocketChannel.connect(f);
     //listen to channel
     customerchannel.stream.forEach((u) {
       CustomerModel item = CustomerModel.fromJson(u);
@@ -186,7 +187,6 @@ class ServerDB extends ChangeNotifier {
       Hive.box<CallTypeModel>("callTypes").put(item.id.toString(), item);
       print("get channel $item");
     });
-   
     prodcutchannel.stream.forEach((u) {
       ProdcutsModel item = ProdcutsModel.fromJson(u);
       Hive.box<ProdcutsModel>("prodcuts").put(item.id.toString(), item);
@@ -195,14 +195,14 @@ class ServerDB extends ChangeNotifier {
    
     reqreasonchannel.stream.forEach((u) {
       ReqReasons item = ReqReasons.fromJson(u);
-      Hive.box<ReqReasons>("governomates").put(item.id.toString(), item);
+      Hive.box<ReqReasons>("reqreasons").put(item.id.toString(), item);
       print("get channel $item");
     });
  
    
-    governomantes.stream.forEach((u) {
-      ReqReasons item = ReqReasons.fromJson(u);
-      Hive.box<ReqReasons>("reqreasons").put(item.id.toString(), item);
+    governomanteschannel.stream.forEach((u) {
+      governomate item = governomate.fromJson(u);
+      Hive.box<governomate>("governomates").put(item.id.toString(), item);
       print("get channel $item");
     });
  
@@ -243,9 +243,9 @@ class ServerDB extends ChangeNotifier {
               .delete(element.id.toString());
         }
         for (var element in Hive.box<governomate>("pendinggovernomates").values) {
-          reqreasonchannel.sink.add(element.toJson());
+          governomanteschannel.sink.add(element.toJson());
           Hive.box<governomate>("pendinggovernomates")
-              .delete(element.id.toString());
+              .delete(element.id.toString());print('2222222222222222222222');
         }
       }
     }

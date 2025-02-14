@@ -27,8 +27,13 @@ searchWithName(BuildContext c) {
               FocusNode mobilnum = FocusNode();
               con.TED_mobileNum.text = conroller.text;
 
-              final filterd =
-                  myType.customers.values.where((e) => (e.cusotmerName + e.adress + e.area + e.covernorate + e.mobilenum.map((e) => e).toString()).contains(conroller.text));
+              final filterd = myType.customers.values.where((e) =>
+                  (e.cusotmerName +
+                          e.adress +
+                          e.area +
+                          e.covernorate +
+                          e.mobilenum.map((e) => e).toString())
+                      .contains(conroller.text));
 
               return AlertDialog(
                 title: Row(
@@ -36,13 +41,14 @@ searchWithName(BuildContext c) {
                   children: [
                     const Text(
                       'البحث ب الاسم',
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                     ),
                     IconButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        icon: Icon(Icons.close))
+                        icon: const Icon(Icons.close))
                   ],
                 ),
                 content: Form(
@@ -56,9 +62,12 @@ searchWithName(BuildContext c) {
                         decoration: InputDecoration(
                             fillColor: const Color.fromARGB(255, 255, 255, 255),
                             filled: true,
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none),
                             hintText: 'Search',
-                            hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
+                            hintStyle: const TextStyle(
+                                color: Colors.grey, fontSize: 18),
                             prefixIcon: Container(
                               padding: const EdgeInsets.all(15),
                               width: 18,
@@ -79,51 +88,84 @@ searchWithName(BuildContext c) {
                                 child: Column(
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            if (con.TED_TicketType.text == 'طلب صيانه') mantananceReq(con, context, valdition),
+                                            if (con.TED_TicketType.text ==
+                                                'طلب صيانه')
+                                              mantananceReq(
+                                                  con, context, valdition),
                                             const Gap(22),
-                                            if (con.TED_TicketType.text == 'مكالمه')
+                                            if (con.TED_TicketType.text ==
+                                                'مكالمه')
                                               Visibility(
                                                   child: Column(
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.only(top: 11),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 11),
                                                     child: Column(
                                                       children: [
-                                                        SearchWithSugestions(
+                                                        SearchWithSugestions(onselected: (p0) {
+                                                          
+                                                        },
                                                           autofocus: false,
-                                                          validator: (value) => value!.isEmpty ? 'Please select ' : null,
+                                                          validator: (value) =>
+                                                              value!.isEmpty
+                                                                  ? 'Please select '
+                                                                  : null,
                                                           labal: 'سبب المكالمه',
-                                                          listOfsugestions: const ["وارد", "صادر"],
-                                                          TEC_forgovernmoate: con.callType,
+                                                          listOfsugestions: const [
+                                                            "وارد",
+                                                            "صادر"
+                                                          ],
+                                                          TEC_forgovernmoate:
+                                                              con.callType,
                                                           onSubmitted: (v) {
-                                                            FocusScope.of(context).nextFocus();
+                                                            FocusScope.of(
+                                                                    context)
+                                                                .nextFocus();
                                                           },
                                                         ),
                                                         const Gap(5),
-                                                        SearchWithSugestions(
+                                                        SearchWithSugestions(onselected: (p0) {
+                                                          
+                                                        },
                                                           labal: 'سبب المكالمه',
-                                                          listOfsugestions: myType.callTypes.values.map((e) => e.callType).toSet().toList(),
-                                                          TEC_forgovernmoate: con.TED_callReason,
+                                                          listOfsugestions:
+                                                              myType.callTypes
+                                                                  .values
+                                                                  .map((e) => e
+                                                                      .callType)
+                                                                  .toSet()
+                                                                  .toList(),
+                                                          TEC_forgovernmoate:
+                                                              con.TED_callReason,
                                                           onSubmitted: (v) {
-                                                            FocusScope.of(context).nextFocus();
+                                                            FocusScope.of(
+                                                                    context)
+                                                                .nextFocus();
                                                           },
                                                         ),
                                                         const Gap(5),
                                                         CustomTextFormField(
                                                             onsubmitted: (v) {
-                                                              FocusScope.of(context).nextFocus();
+                                                              FocusScope.of(
+                                                                      context)
+                                                                  .nextFocus();
                                                               return null;
                                                             },
                                                             autofocus: true,
                                                             hint: 'تفصيل',
                                                             width: 200,
-                                                            controller: con.TED_callReasondetails),
+                                                            controller: con
+                                                                .TED_callReasondetails),
                                                       ],
                                                     ),
                                                   ),
@@ -140,16 +182,23 @@ searchWithName(BuildContext c) {
                                                   conroller.text,
                                                 ),
                                                 //نوع
-                                                SearchWithSugestions(
-                                                  validator: (value) => value!.isEmpty ? 'Please select ' : null,
+                                                SearchWithSugestions( onselected: (p0) {
+                                                  
+                                                },
+                                                  validator: (value) =>
+                                                      value!.isEmpty
+                                                          ? 'Please select '
+                                                          : null,
                                                   labal: 'type',
                                                   listOfsugestions: types,
-                                                  TEC_forgovernmoate: con.TED_TicketType,
+                                                  TEC_forgovernmoate:
+                                                      con.TED_TicketType,
                                                   onSubmitted: (f) {
-                                                    FocusScope.of(context).nextFocus();
+                                                    FocusScope.of(context)
+                                                        .nextFocus();
                                                   },
                                                 ),
-                                                Gap(12),
+                                                const Gap(12),
                                                 // buttoms
                                                 buttoms(context, con)
                                               ],
@@ -165,9 +214,13 @@ searchWithName(BuildContext c) {
                           : Column(
                               children: [
                                 Container(
-                                  decoration: BoxDecoration(border: Border.all(), color: const Color.fromARGB(255, 197, 197, 202)),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(),
+                                      color: const Color.fromARGB(
+                                          255, 197, 197, 202)),
                                   child: const Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       Text("العنوان"),
                                       Text("المنطقه"),
@@ -179,33 +232,45 @@ searchWithName(BuildContext c) {
                                 ),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width * .6,
-                                  height: MediaQuery.of(context).size.height * .6,
+                                  height:
+                                      MediaQuery.of(context).size.height * .6,
                                   child: SingleChildScrollView(
                                     child: Column(children: [
-                                      ...filterd.take(20).map((el) => TextButton(
-                                          onPressed: () {
-                                            myType.shosenCustomer = null;
-                                            myType.chosenTicket = null;
-                                            context.read<HiveDB>().shosenCustomer = el;
+                                      ...filterd
+                                          .take(20)
+                                          .map((el) => TextButton(
+                                              onPressed: () {
+                                                myType.shosenCustomer = null;
+                                                myType.chosenTicket = null;
+                                                context
+                                                    .read<HiveDB>()
+                                                    .shosenCustomer = el;
 
-                                            context.read<HiveDB>().Refresh_UI();
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(border: Border.all()),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Text(el.adress),
-                                                Text(el.area),
-                                                Text(el.covernorate),
-                                                Text(el.cusotmerName),
-                                                Column(
-                                                  children: el.mobilenum.map((r) => Text(r)).toList(),
-                                                )
-                                              ],
-                                            ),
-                                          )))
+                                                context
+                                                    .read<HiveDB>()
+                                                    .Refresh_UI();
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all()),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    Text(el.adress),
+                                                    Text(el.area),
+                                                    Text(el.covernorate),
+                                                    Text(el.cusotmerName),
+                                                    Column(
+                                                      children: el.mobilenum
+                                                          .map((r) => Text(r))
+                                                          .toList(),
+                                                    )
+                                                  ],
+                                                ),
+                                              )))
                                     ]),
                                   ),
                                 ),
@@ -219,7 +284,13 @@ searchWithName(BuildContext c) {
           ));
 }
 
-Column custmerDetails(String? Function(dynamic v) valdition, BuildContext context, TEDcontrollers con, List<String> governomets, FocusNode mobilnum, String d) {
+Column custmerDetails(
+    String? Function(dynamic v) valdition,
+    BuildContext context,
+    TEDcontrollers con,
+    List<String> governomets,
+    FocusNode mobilnum,
+    String d) {
   return Column(
     children: [
       const Gap(5),
@@ -245,14 +316,20 @@ Column custmerDetails(String? Function(dynamic v) valdition, BuildContext contex
           width: 200,
           controller: con.TED_customerName),
       const Gap(5),
-      SearchWithSugestions(
+      SearchWithSugestions(onselected: (p0) {
+        
+      },
         validator: (p0) {
-       if (g.keys.where((element) => element==p0,).isEmpty) {
-         return 'اختر من المحافظات الموجوده';
-       } else {
-         return null;
-       }
-    },
+          if (g.keys
+              .where(
+                (element) => element == p0,
+              )
+              .isEmpty) {
+            return 'اختر من المحافظات الموجوده';
+          } else {
+            return null;
+          }
+        },
         labal: 'المحافظه',
         listOfsugestions: governomets,
         TEC_forgovernmoate: con.TED_governomate,
@@ -260,17 +337,24 @@ Column custmerDetails(String? Function(dynamic v) valdition, BuildContext contex
           FocusScope.of(context).nextFocus();
         },
       ),
-    
-    SearchWithSugestions(
-              validator: (p1) {
-       if (g.values.expand((e) => e,).toList().where((element) => element==p1,).isEmpty) {
-         return 'اختر من المدن الموجوده';
-       } else {
-         return null;
-       }
-    },
+      SearchWithSugestions(onselected: (p0) {
+        
+      },
+          validator: (p1) {
+            
+            if ( g[con.TED_governomate.text]==null) {
+              return 'اختر من المدن الموجوده';
+            } else {
+              if ( g[con.TED_governomate.text]!.where((element) => element==p1,).isEmpty) {
+                  return 'اختر من المدن الموجوده';
+              } else {
+                  return null;
+              }
+            
+            }
+          },
         labal: 'منطقة',
-        listOfsugestions: g[con.TED_governomate.text]??[],
+        listOfsugestions: g[con.TED_governomate.text] ?? [],
         TEC_forgovernmoate: con.TED_area,
         onSubmitted: (v) {
           FocusScope.of(context).nextFocus();
@@ -281,7 +365,13 @@ Column custmerDetails(String? Function(dynamic v) valdition, BuildContext contex
           onsubmitted: (v) {
             if (con.validate()) {
               Navigator.of(context).pop();
-              context.read<HiveDB>().shosenCustomer = context.read<HiveDB>().customers.values.toList().where((e) => e.mobilenum.where((b) => b == d).isNotEmpty).first;
+              context.read<HiveDB>().shosenCustomer = context
+                  .read<HiveDB>()
+                  .customers
+                  .values
+                  .toList()
+                  .where((e) => e.mobilenum.where((b) => b == d).isNotEmpty)
+                  .first;
               context.read<HiveDB>().Refresh_UI();
             }
             return null;
@@ -296,7 +386,8 @@ Column custmerDetails(String? Function(dynamic v) valdition, BuildContext contex
   );
 }
 
-Row mantananceReq(TEDcontrollers con, BuildContext context, String? Function(dynamic v) valdition) {
+Row mantananceReq(TEDcontrollers con, BuildContext context,
+    String? Function(dynamic v) valdition) {
   FocusNode q = FocusNode();
   FocusNode place = FocusNode();
   FocusNode date = FocusNode();
@@ -310,9 +401,12 @@ Row mantananceReq(TEDcontrollers con, BuildContext context, String? Function(dyn
             padding: const EdgeInsets.only(top: 11),
             child: Column(
               children: [
-                SearchWithSugestions(
+                SearchWithSugestions(onselected: (p0) {
+                  
+                },
                   autofocus: false,
-                  validator: (value) => value!.isEmpty ? 'Please select ' : null,
+                  validator: (value) =>
+                      value!.isEmpty ? 'Please select ' : null,
                   labal: 'نوع المكالمه',
                   listOfsugestions: const ["وارد", "صادر"],
                   TEC_forgovernmoate: con.callType,
@@ -321,11 +415,20 @@ Row mantananceReq(TEDcontrollers con, BuildContext context, String? Function(dyn
                   },
                 ),
                 const Gap(5),
-                SearchWithSugestions(
-                  validator: (value) => value!.isEmpty ? 'Please select ' : null,
+                SearchWithSugestions(onselected: (p0) {
+                  
+                },
+                  validator: (value) =>
+                      value!.isEmpty ? 'Please select ' : null,
                   autofocus: false,
                   labal: 'سبب المكالمه',
-                  listOfsugestions: context.read<HiveDB>().callTypes.values.map((e) => e.callType).toSet().toList(),
+                  listOfsugestions: context
+                      .read<HiveDB>()
+                      .callTypes
+                      .values
+                      .map((e) => e.callType)
+                      .toSet()
+                      .toList(),
                   TEC_forgovernmoate: con.TED_callReason,
                   onSubmitted: (v) {
                     FocusScope.of(context).nextFocus();
@@ -350,20 +453,36 @@ Row mantananceReq(TEDcontrollers con, BuildContext context, String? Function(dyn
       )),
       Column(
         children: [
-          SearchWithSugestions(
+          SearchWithSugestions(onselected: (p0) {
+            
+          },
             labal: 'العلامة التجاريه',
-            listOfsugestions: context.read<HiveDB>().prodcuts.values.map((convert) => convert.companyName).toList(),
+            listOfsugestions: context
+                .read<HiveDB>()
+                .prodcuts
+                .values
+                .map((convert) => convert.companyName)
+                .toList(),
             TEC_forgovernmoate: con.TED_productType,
             onSubmitted: (f) {
               // con.validate();
               FocusScope.of(context).nextFocus();
             },
           ),
-          SearchWithSugestions(
+          SearchWithSugestions(onselected: (p0) {
+            
+          },
             labal: 'اسم المنتج',
             listOfsugestions: con.TED_productType.text.isEmpty
                 ? []
-                : context.read<HiveDB>().prodcuts.values.where((test) => test.companyName == con.TED_productType.text).expand((e) => e.prodcuts).toList(),
+                : context
+                    .read<HiveDB>()
+                    .prodcuts
+                    .values
+                    .where(
+                        (test) => test.companyName == con.TED_productType.text)
+                    .expand((e) => e.prodcuts)
+                    .toList(),
             TEC_forgovernmoate: con.TED_ProdcutName,
             onSubmitted: (f) {
               // con.validate();
@@ -433,7 +552,11 @@ Row mantananceReq(TEDcontrollers con, BuildContext context, String? Function(dyn
               focuasnode: date,
               ontap: () {
                 DateTime? pickedDate;
-                showDatePicker(context: context, firstDate: DateTime(1950), lastDate: DateTime(2090)).then((onValue) {
+                showDatePicker(
+                        context: context,
+                        firstDate: DateTime(1950),
+                        lastDate: DateTime(2090))
+                    .then((onValue) {
                   pickedDate = onValue;
                   if (pickedDate != null) {
                     con.TED_purcheDate.text = pickedDate!.toString();
@@ -451,9 +574,16 @@ Row mantananceReq(TEDcontrollers con, BuildContext context, String? Function(dyn
               width: 200,
               controller: con.TED_purcheDate),
           const Gap(5),
-          SearchWithSugestions(
+          SearchWithSugestions(onselected:  (p0) {
+            
+          },
             TEC_forgovernmoate: con.TED_RequestReason,
-            listOfsugestions: context.read<HiveDB>().reqreasons.values.map((toElement) => toElement.Reqreason).toList(),
+            listOfsugestions: context
+                .read<HiveDB>()
+                .reqreasons
+                .values
+                .map((toElement) => toElement.Reqreason)
+                .toList(),
             validator: valdition,
             onSubmitted: (v) {
               FocusScope.of(context).nextFocus();

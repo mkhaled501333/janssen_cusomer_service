@@ -75,7 +75,9 @@ class calls extends StatelessWidget {
                                       child: SingleChildScrollView(
                                         child: Column(
                                           children: [
-                                            SearchWithSugestions(
+                                            SearchWithSugestions(onselected: (p0) {
+                                              
+                                            },
                                                 listOfsugestions: myType.callTypes.values.map((e) => e.callType).toList(),
                                                 validator: (v) {
                                                   if (v != '') {
@@ -147,7 +149,9 @@ class calls extends StatelessWidget {
                                       child: SingleChildScrollView(
                                         child: Column(
                                           children: [
-                                            SearchWithSugestions(
+                                            SearchWithSugestions(onselected: (p0) {
+                                              
+                                            },
                                                 listOfsugestions: myType.callTypes.values.map((e) => e.callType).toList(),
                                                 validator: (v) {
                                                   if (v != '') {

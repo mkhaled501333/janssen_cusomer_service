@@ -46,7 +46,7 @@ class governomate {
     return governomate(
       id: map['id'] as int,
       governo: map['governo'] as String,
-      cityies: List<String>.from((map['cityies'] as List<String>),
+      cityies: List<String>.from((map['cityies'] as List<dynamic>),
   ) );
   }
 

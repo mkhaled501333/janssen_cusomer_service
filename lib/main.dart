@@ -97,7 +97,7 @@ void main() async {
     compactionStrategy: (entries, deletedEntries) => false,
   );
   await Hive.openBox<governomate>(
-    "pendingovernomates",
+    "pendinggovernomates",
     compactionStrategy: (entries, deletedEntries) => false,
   );
   sharedPrefs = await SharedPreferences.getInstance();
@@ -139,7 +139,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // context.read<HiveDB>().addtttt(g);
     context.read<HiveDB>().SendPending_GetAll_ConnectAndListenchannels();
+    
+    
   context.read<HiveDB>().governamates.values.forEach((element) {
       g.addAll({element.governo:element.cityies});
     },);
